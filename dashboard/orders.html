@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Orders</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html">Dashboard</a> |
+  <a href="orders.html">Orders</a> |
+  <a href="activity.html">Activity Log</a> |
+  <a href="manual.html">Manual Control</a> |
+  <a href="scheduler.html">Scheduler</a> |
+  <a href="prompts.html">Prompt Manager</a> |
+  <a href="settings.html">Settings</a> |
+  <a href="recipients.html">Recipients</a>
+</nav>
+<h1>Orders</h1>
+<div id="content">Loading...</div>
+<script src="main.js"></script>
+<script>
+async function loadOrders(){
+  try{const data=await api('/orders');
+    document.getElementById('content').innerText=JSON.stringify(data,null,2);
+  }catch(e){document.getElementById('content').innerText='Error: '+e.message;}
+}
+loadOrders();
+</script>
+</body>
+</html>
