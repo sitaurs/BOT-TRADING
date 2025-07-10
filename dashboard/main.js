@@ -19,3 +19,18 @@ async function loadStatus() {
 if (location.pathname.endsWith('index.html') || location.pathname === '/') {
   loadStatus();
 }
+
+async function insertHeader() {
+  const el = document.getElementById('header');
+  if (!el) return;
+  try {
+    const res = await fetch('header.html');
+    if (res.ok) {
+      el.innerHTML = await res.text();
+    }
+  } catch (e) {
+    console.error('Failed to load header', e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', insertHeader);
