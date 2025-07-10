@@ -26,7 +26,10 @@ const CACHE_DIR = path.join(__dirname, '..', 'analysis_cache');
 const DXY_SYMBOL = 'TVC:DXY';
 const API_KEY_STATUS_PATH = path.join(__dirname, '..', 'config', 'api_key_status.json');
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${process.env.GEMINI_API_KEY}`;
-const supportedPairs = (process.env.SUPPORTED_PAIRS || '').split(',').map(p => p.trim().toUpperCase());
+// Ambil daftar pair yang didukung dari env dengan fallback yang sama seperti di index.js
+const supportedPairs = process.env.SUPPORTED_PAIRS
+    ? process.env.SUPPORTED_PAIRS.split(',').map(p => p.trim().toUpperCase())
+    : ['USDJPY', 'USDCHF', 'GBPUSD'];
 
 
 
