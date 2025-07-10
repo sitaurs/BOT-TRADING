@@ -1,5 +1,14 @@
+function ensureToken(){
+  let t = localStorage.getItem('token');
+  if(!t){
+    t = prompt('Enter dashboard token:');
+    if(t) localStorage.setItem('token', t);
+  }
+  return t;
+}
+
 async function api(path, options = {}) {
-  const token = localStorage.getItem('token');
+  const token = ensureToken();
   options.headers = options.headers || {};
   if (token) options.headers['Authorization'] = 'Bearer ' + token;
   const res = await fetch(path, options);

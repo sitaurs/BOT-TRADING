@@ -29,4 +29,4 @@ Authorization: Bearer <DASHBOARD_TOKEN>
 - **Settings** – mengubah konfigurasi `.env` dan berkas di `config/`.
 - **Recipients Management** – kelola daftar penerima notifikasi.
 
-Semua halaman masih sederhana dan dapat dikembangkan sesuai kebutuhan.
+Tampilan dashboard memakai tema gradasi ungu-biru dengan efek blur dan animasi sederhana sehingga lebih enak dipandang. Halaman-halaman tersebut masih dapat dikembangkan lebih lanjut sesuai kebutuhan.
