@@ -1,0 +1,10 @@
+{
+  "symbol": "EURUSD",
+  "type": "ORDER_TYPE_BUY_LIMIT",
+  "price": 1.1725,
+  "sl": 1.1708,
+  "tp": 1.1759,
+  "volume": 0.02,
+  "comment": "BotV7 | EURUSD",
+  "ticket": 830822246
+}

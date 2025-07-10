@@ -1,0 +1,10 @@
+{
+  "symbol": "USDCHF",
+  "type": "ORDER_TYPE_BUY_LIMIT",
+  "price": 0.7943,
+  "sl": 0.793,
+  "tp": 0.7975,
+  "volume": 0.02,
+  "comment": "BotV7 | USDCHF",
+  "ticket": 831093276
+}

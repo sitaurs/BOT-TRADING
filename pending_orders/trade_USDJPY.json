@@ -1,0 +1,10 @@
+{
+  "symbol": "USDJPY",
+  "type": "ORDER_TYPE_BUY_LIMIT",
+  "price": 146.275,
+  "sl": 146.02,
+  "tp": 146.785,
+  "volume": 0.02,
+  "comment": "BotV7 | USDJPY",
+  "ticket": 831066457
+}
