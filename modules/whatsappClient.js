@@ -5,8 +5,14 @@ const {
     fetchLatestBaileysVersion
 } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
+const { webcrypto } = require('crypto');
 const path = require('path');
 const fs = require('fs');
+
+// Ensure Baileys has access to Web Crypto across Node versions
+if (!globalThis.crypto) {
+    globalThis.crypto = webcrypto;
+}
 
 // Path untuk menyimpan file sesi. Penting agar tidak perlu login berulang kali.
 const SESSION_DIR = path.join(__dirname, '..', 'whatsapp-session');
