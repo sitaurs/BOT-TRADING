@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dashboard')));
 
-const AUTH_TOKEN = process.env.DASHBOARD_TOKEN || '';
+let AUTH_TOKEN = process.env.DASHBOARD_TOKEN || '';
 const SUPPORTED_PAIRS = process.env.SUPPORTED_PAIRS ? process.env.SUPPORTED_PAIRS.split(',').map(p=>p.trim().toUpperCase()) : [];
 const CONFIG_DIR = path.join(__dirname, 'config');
 const PENDING_DIR = path.join(__dirname, 'pending_orders');
@@ -143,6 +143,10 @@ app.post('/settings', auth, async (req, res) => {
   const envPath = path.join(__dirname, '.env');
   if (env) {
     await fs.writeFile(envPath, stringifyEnv(env));
+    if (Object.prototype.hasOwnProperty.call(env, 'DASHBOARD_TOKEN')) {
+      AUTH_TOKEN = env.DASHBOARD_TOKEN;
+      process.env.DASHBOARD_TOKEN = env.DASHBOARD_TOKEN;
+    }
   }
   if (Array.isArray(configs)) {
     for (const c of configs) {
