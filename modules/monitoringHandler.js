@@ -49,15 +49,18 @@ async function checkAllTrades() {
             // Jika tiket pending order ada di daftar posisi aktif, berarti sudah tereksekusi
             if (activeTickets.includes(pendingData.ticket)) {
                 console.log(`[MONITORING] DETEKSI: Pending order #${pendingData.ticket} telah tereksekusi!`);
-                
-                // Pindahkan file dari folder 'pending_orders' ke 'live_positions'
-                // Pindahkan file dari folder 'pending_orders' ke 'live_positions'
-const newPositionFileName = `trade_${pendingData.symbol}.json`; // <-- NAMA FILE DISTANDARISASI
-const newPath = path.join(POSITIONS_DIR, newPositionFileName);
-// Langsung ganti nama file untuk memindahkannya. Ini lebih efisien.
-await fs.rename(filePath, newPath);
 
-broadcast(`✅ *Order Terekseskusi:* Pending order untuk ${pendingData.symbol} (#${pendingData.ticket}) telah menjadi posisi aktif.`);
+                const newPositionFileName = `trade_${pendingData.symbol}.json`;
+                const newPath = path.join(POSITIONS_DIR, newPositionFileName);
+
+                // Cari detail posisi aktif dari broker untuk memperbarui data
+                const activeInfo = activePositions.find(p => p.ticket === pendingData.ticket);
+                const updatedData = activeInfo ? activeInfo : pendingData;
+
+                await fs.writeFile(newPath, JSON.stringify(updatedData, null, 2));
+                await fs.unlink(filePath).catch(() => {});
+
+                broadcast(`✅ *Order Terekseskusi:* Pending order untuk ${pendingData.symbol} (#${pendingData.ticket}) telah menjadi posisi aktif.`);
             }
         }
 

@@ -189,14 +189,15 @@ async function handleCloseCommand(text, chatId, whatsappSocket) {
     await whatsappSocket.sendMessage(chatId, { text: `⏳ Mencoba menutup/membatalkan order untuk *${pair}*...` });
 
     try {
-        // PERBAIKAN: Mencari file dengan format yang konsisten
-// PERBAIKAN: Mencari file dengan format yang konsisten
-    const pendingOrderPath = path.join(PENDING_DIR, `trade_${pair}.json`);
-    const livePositionPath = path.join(POSITIONS_DIR, `trade_${pair}.json`); // <-- PERBAIKI PATH INI
+        const pendingOrderPath = path.join(PENDING_DIR, `trade_${pair}.json`);
+        const livePositionPath = path.join(POSITIONS_DIR, `trade_${pair}.json`);
 
-    // Cari di kedua folder, tentukan tipe berdasarkan folder mana yang ada filenya
-    const tradeToClose = await readJsonFile(livePositionPath) || await readJsonFile(pendingOrderPath);
-    const tradeType = await readJsonFile(livePositionPath) ? 'live' : 'pending';
+    // Baca kedua file sekali untuk menentukan sumber trade
+    const liveData = await readJsonFile(livePositionPath);
+    const pendingData = await readJsonFile(pendingOrderPath);
+
+    const tradeToClose = liveData || pendingData;
+    const tradeType = liveData ? 'live' : 'pending';
 
     if (!tradeToClose || !tradeToClose.ticket) {
         return whatsappSocket.sendMessage(chatId, { text: `❌ Tidak ditemukan order aktif atau pending untuk *${pair}*.` });

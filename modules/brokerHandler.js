@@ -163,7 +163,10 @@ async function getClosingDealInfo(positionId) {
           return null;
       }
       
-      const closingDeal = allDeals.find(deal => deal.position_id === positionId && deal.entry === 1);
+        const closingDeal = allDeals.find(deal =>
+            (deal.position_id === positionId || deal.position === positionId) &&
+            (deal.entry === 1 || deal.entry_type === 1)
+        );
 
       if (closingDeal) {
           console.log(`[BROKER HANDLER] SUKSES! Closing deal yang valid ditemukan untuk position ${positionId}:`, closingDeal);
