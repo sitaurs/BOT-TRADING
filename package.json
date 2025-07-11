@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"node index.js\" \"node server.js\"",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
