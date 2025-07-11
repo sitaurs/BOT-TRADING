@@ -1,11 +1,16 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
+interface User {
+  username: string
+  email?: string
+}
+
 interface AuthContextType {
   isAuthenticated: boolean
   loading: boolean
-  login: (token: string) => Promise<boolean>
+  user: User | null
+  login: (username: string, password: string) => Promise<boolean>
   logout: () => void
-  token: string | null
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -25,52 +30,51 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [token, setToken] = useState<string | null>(null)
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('dashboard_token')
-    if (savedToken) {
-      setToken(savedToken)
+    const savedUser = localStorage.getItem('dashboard_user')
+    const savedAuth = localStorage.getItem('dashboard_auth')
+    
+    if (savedUser && savedAuth === 'true') {
+      setUser(JSON.parse(savedUser))
       setIsAuthenticated(true)
     }
     setLoading(false)
   }, [])
 
-  const login = async (inputToken: string): Promise<boolean> => {
-    try {
-      // Test the token by making a request to the status endpoint
-      const response = await fetch('/api/status', {
-        headers: {
-          'Authorization': `Bearer ${inputToken}`
-        }
-      })
-
-      if (response.ok) {
-        localStorage.setItem('dashboard_token', inputToken)
-        setToken(inputToken)
-        setIsAuthenticated(true)
-        return true
-      } else {
-        return false
-      }
-    } catch (error) {
-      console.error('Login error:', error)
-      return false
+  const login = async (username: string, password: string): Promise<boolean> => {
+    // Simple authentication - in production, this should be server-side
+    const defaultCredentials = {
+      username: 'admin',
+      password: 'admin123'
     }
+
+    if (username === defaultCredentials.username && password === defaultCredentials.password) {
+      const userData = { username, email: 'admin@tradingbot.com' }
+      localStorage.setItem('dashboard_user', JSON.stringify(userData))
+      localStorage.setItem('dashboard_auth', 'true')
+      setUser(userData)
+      setIsAuthenticated(true)
+      return true
+    }
+    
+    return false
   }
 
   const logout = () => {
-    localStorage.removeItem('dashboard_token')
-    setToken(null)
+    localStorage.removeItem('dashboard_user')
+    localStorage.removeItem('dashboard_auth')
+    setUser(null)
     setIsAuthenticated(false)
   }
 
   const value = {
     isAuthenticated,
     loading,
+    user,
     login,
-    logout,
-    token
+    logout
   }
 
   return (

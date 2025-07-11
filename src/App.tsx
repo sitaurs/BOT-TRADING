@@ -1,30 +1,41 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider, useAuth } from './contexts/AuthContext'
+import { ThemeProvider } from './contexts/ThemeContext'
 import LoginPage from './components/LoginPage'
 import Dashboard from './components/Dashboard'
-import { AuthProvider, useAuth } from './contexts/AuthContext'
+import LoadingSpinner from './components/LoadingSpinner'
 
 function AppContent() {
   const { isAuthenticated, loading } = useAuth()
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <div className="glass rounded-2xl p-8">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-400 mx-auto"></div>
-          <p className="text-white/80 mt-4 text-center">Loading...</p>
-        </div>
-      </div>
-    )
+    return <LoadingSpinner />
   }
 
-  return isAuthenticated ? <Dashboard /> : <LoginPage />
+  return (
+    <Router>
+      <Routes>
+        <Route 
+          path="/login" 
+          element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/*" 
+          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" replace />} 
+        />
+      </Routes>
+    </Router>
+  )
 }
 
 function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
   )
 }
 
