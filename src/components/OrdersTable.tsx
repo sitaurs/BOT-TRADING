@@ -1,4 +1,3 @@
-import React from 'react'
 import { RefreshCw, TrendingUp, Clock, X } from 'lucide-react'
 
 interface OrdersTableProps {

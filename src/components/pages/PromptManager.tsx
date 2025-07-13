@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import type { CSSProperties } from 'react'
 import { FileText, Save, RefreshCw, Edit, Eye } from 'lucide-react'
 import { useTheme } from '../../contexts/ThemeContext'
 
@@ -181,7 +182,7 @@ export default function PromptManager() {
                     value={promptContent}
                     onChange={(e) => setPromptContent(e.target.value)}
                     className="w-full h-full bg-black/30 border border-white/20 rounded-xl p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:border-transparent resize-none font-mono text-sm"
-                    style={{ focusRingColor: theme.primaryColor }}
+                    style={{ '--tw-ring-color': theme.primaryColor } as CSSProperties }
                     placeholder="Enter prompt content..."
                   />
                 ) : (

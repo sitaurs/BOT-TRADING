@@ -32,6 +32,18 @@
     "google-spreadsheet": "^4.1.2",
     "node-cron": "^3.0.3",
     "qrcode-terminal": "^0.12.0",
-    "sharp": "^0.32.6"
+    "sharp": "^0.32.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.6.3",
+    "lucide-react": "^0.367.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.22",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8"
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Settings, Save, Plus, Trash2, DollarSign, TrendingUp } from 'lucide-react'
 import { useTheme } from '../../contexts/ThemeContext'
 
