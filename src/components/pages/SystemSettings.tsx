@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Settings, Save, Palette, User, Lock, Upload, Image } from 'lucide-react'
+import { useState } from 'react'
+import { Save, Palette, User, Lock, Upload, Image } from 'lucide-react'
 import { useTheme } from '../../contexts/ThemeContext'
 import { useAuth } from '../../contexts/AuthContext'
 

@@ -1,5 +1,4 @@
-import React from 'react'
-import { TrendingUp, TrendingDown, Activity, DollarSign, Clock, AlertTriangle } from 'lucide-react'
+import { TrendingUp, Activity, DollarSign, Clock, AlertTriangle } from 'lucide-react'
 
 interface StatusCardProps {
   status: string

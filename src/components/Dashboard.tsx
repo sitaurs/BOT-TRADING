@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import Header from './Header'
@@ -9,10 +8,8 @@ import ManualControl from './pages/ManualControl'
 import PromptManager from './pages/PromptManager'
 import TradingSettings from './pages/TradingSettings'
 import SystemSettings from './pages/SystemSettings'
-import { useTheme } from '../contexts/ThemeContext'
 
 export default function Dashboard() {
-  const { theme } = useTheme()
 
   return (
     <div className="min-h-screen flex relative overflow-hidden">

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import type { CSSProperties } from 'react'
 import { User, Lock, Eye, EyeOff, TrendingUp } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import { useTheme } from '../contexts/ThemeContext'
@@ -88,7 +89,7 @@ export default function LoginPage() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="block w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200"
-                  style={{ focusRingColor: theme.primaryColor }}
+                  style={{ '--tw-ring-color': theme.primaryColor } as CSSProperties }
                   placeholder="Enter your username"
                   disabled={isLoading}
                 />

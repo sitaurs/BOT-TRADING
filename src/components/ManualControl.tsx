@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Terminal, Send, Copy, Trash2 } from 'lucide-react'
-import { useAuth } from '../contexts/AuthContext'
 
 export default function ManualControl() {
   const [command, setCommand] = useState('')
   const [output, setOutput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [history, setHistory] = useState<string[]>([])
-  const { token } = useAuth()
 
   const commonCommands = [
     '/status',
@@ -30,8 +28,7 @@ export default function ManualControl() {
       const response = await fetch('/api/command', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ command: command.trim() })
       })

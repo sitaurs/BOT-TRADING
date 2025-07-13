@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import type { CSSProperties } from 'react'
 import { Terminal, Send, Copy, Trash2, Play, BarChart3, DollarSign, Pause, Users } from 'lucide-react'
 import { useTheme } from '../../contexts/ThemeContext'
 
@@ -92,7 +93,7 @@ export default function ManualControl() {
                   onKeyPress={handleKeyPress}
                   placeholder="Enter command (e.g., /status)"
                   className="w-full px-4 py-3 bg-black/30 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:border-transparent font-mono"
-                  style={{ focusRingColor: theme.primaryColor }}
+                  style={{ '--tw-ring-color': theme.primaryColor } as CSSProperties }
                   disabled={isLoading}
                 />
                 <button
